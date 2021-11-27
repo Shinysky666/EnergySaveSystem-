@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Communication
+namespace EnergySaveSystem.Model
 {
-    public class Class1
+    //监控数据模型
+    public class MonitorValueModel
     {
+
     }
 }

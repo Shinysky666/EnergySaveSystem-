@@ -74,3 +74,7 @@ D:\Study\EnergySaveSystem\EnergySaveSystem\obj\Debug\EnergySaveSystem.csproj.Cor
 D:\Study\EnergySaveSystem\EnergySaveSystem\obj\Debug\EnergySaveSystem.csproj.CopyComplete
 D:\Study\EnergySaveSystem\EnergySaveSystem\obj\Debug\EnergySaveSystem.exe
 D:\Study\EnergySaveSystem\EnergySaveSystem\obj\Debug\EnergySaveSystem.pdb
+D:\Study\EnergySaveSystem\EnergySaveSystem\bin\Debug\Communication.dll
+D:\Study\EnergySaveSystem\EnergySaveSystem\bin\Debug\Controls.dll
+D:\Study\EnergySaveSystem\EnergySaveSystem\bin\Debug\Communication.pdb
+D:\Study\EnergySaveSystem\EnergySaveSystem\bin\Debug\Controls.pdb

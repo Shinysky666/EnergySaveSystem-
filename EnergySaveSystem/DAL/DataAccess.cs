@@ -11,6 +11,7 @@ namespace EnergySaveSystem.DAL
 {
     public class DataAccess
     {
+        public static DataAccess instance;
         string dbConfig = ConfigurationManager.ConnectionStrings["db_config"].ToString();
         MySqlConnection connection;
         MySqlCommand command;
@@ -67,19 +68,19 @@ namespace EnergySaveSystem.DAL
 
         public DataTable GetStorageArea()
         {
-            string stringSql = "";
+            string stringSql = "select * from storage_area";
             return GetData(stringSql);
         }
 
         public DataTable GetDevice()
         {
-            string stringSql = "";
+            string stringSql = "select * from deviceinfo";
             return GetData(stringSql);
         }
 
         public DataTable GetMonitorValues()
         {
-            string stringSql = "";
+            string stringSql = "select * from monitor_values Order by d_id , value_id";
             return GetData(stringSql);
         }
 
