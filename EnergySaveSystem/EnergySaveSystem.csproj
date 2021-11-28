@@ -118,6 +118,7 @@
     <Compile Include="Model\DeviceModel.cs" />
     <Compile Include="Model\MonitorValueModel.cs" />
     <Compile Include="Model\StorageAreaModel.cs" />
+    <Compile Include="Model\WarningMessageModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

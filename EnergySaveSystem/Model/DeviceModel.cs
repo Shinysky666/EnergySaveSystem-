@@ -11,10 +11,11 @@ namespace EnergySaveSystem.Model
     {
         public string DeviceId { get; set; }
         public string DeviceName { get; set; }
+        public bool IsWarning { get; set; } = false;
 
         public ObservableCollection<MonitorValueModel> MonitorValueList { get; set; } =
             new ObservableCollection<MonitorValueModel>();
-        public ObservableCollection<string> WarningMessageList { get; set; } =
-            new ObservableCollection<string>();
+        public ObservableCollection<WarningMessageModel> WarningMessageList { get; set; } =
+            new ObservableCollection<WarningMessageModel>();
     }
 }
