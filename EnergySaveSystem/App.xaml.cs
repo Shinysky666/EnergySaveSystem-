@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EnergySaveSystem.Base;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -13,5 +14,19 @@ namespace EnergySaveSystem
     /// </summary>
     public partial class App : Application
     {
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
+
+            GlobalMonitor.Start(
+                () => 
+                {
+                    new MainWindow().Show();
+                },
+                (msg) => 
+                {
+                    
+                });
+        }
     }
 }

@@ -133,6 +133,7 @@ namespace EnergySaveSystem.BLL
                     }
                     
                 }
+                result.State = true;
                 result.Data = devicelist;
             }
             catch (Exception e)
