@@ -10,3 +10,9 @@ D:\Study\EnergySaveSystem\Communication\obj\Debug\Communication.csproj.AssemblyR
 D:\Study\EnergySaveSystem\Communication\obj\Debug\Communication.csproj.CoreCompileInputs.cache
 D:\Study\EnergySaveSystem\Communication\obj\Debug\Communication.dll
 D:\Study\EnergySaveSystem\Communication\obj\Debug\Communication.pdb
+E:\Study\EnergySaveSystem-\Communication\bin\Debug\Communication.dll
+E:\Study\EnergySaveSystem-\Communication\bin\Debug\Communication.pdb
+E:\Study\EnergySaveSystem-\Communication\obj\Debug\Communication.csproj.AssemblyReference.cache
+E:\Study\EnergySaveSystem-\Communication\obj\Debug\Communication.csproj.CoreCompileInputs.cache
+E:\Study\EnergySaveSystem-\Communication\obj\Debug\Communication.dll
+E:\Study\EnergySaveSystem-\Communication\obj\Debug\Communication.pdb

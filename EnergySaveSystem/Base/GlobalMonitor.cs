@@ -11,7 +11,7 @@ namespace EnergySaveSystem.Base
 {
     public class GlobalMonitor
     {
-        public static List<StorageAreaModel> StorageLis { get; set; }
+        public static List<StorageAreaModel> StorageList { get; set; }
         public static List<DeviceModel> DeviceList { get; set; }
         public static SerialInfo serialInfo { get; set; }
 
@@ -23,6 +23,7 @@ namespace EnergySaveSystem.Base
             mainTask = Task.Run(() =>
             {
                 IndustrialBLL industrialbll = new IndustrialBLL();
+                //获取串口配置信息
                 var si = industrialbll.InitSerialInfo();
                 if (si.State)
                 {
@@ -33,6 +34,30 @@ namespace EnergySaveSystem.Base
                     FalseAction(si.Message);
                     return;
                 }
+                //获取存储区信息
+                var sa = industrialbll.InitStorageArea();
+                if(sa.State)
+                {
+                    StorageList = sa.Data;
+                }
+                else
+                {
+                    FalseAction(sa.Message);
+                    return;
+                }
+                //初始化设备变量集合及其警戒值
+                var dr = industrialbll.InitDevices();
+                if (dr.State)
+                {
+                    DeviceList = dr.Data;
+                }
+                else
+                {
+                    FalseAction(dr.Message);
+                    return;
+                }
+
+
                 SuccessAction();
 
                 while (IsRunging)
