@@ -1,4 +1,5 @@
 ﻿using Communication;
+using Communication.Modbus;
 using EnergySaveSystem.BLL;
 using EnergySaveSystem.Model;
 using System;
@@ -57,13 +58,22 @@ namespace EnergySaveSystem.Base
                     return;
                 }
 
-
-                SuccessAction();
-
-                while (IsRunging)
+                //初始化串口通信
+                var rtu = RTU.GetInstance(serialInfo);
+                if(rtu.Connection())
                 {
+                    SuccessAction();
+                    //程序运行时不断刷新串口通信
+                    while (IsRunging)
+                    {
 
+                    }
                 }
+                else
+                {
+                    FalseAction("程序无法启动,串口连接初始化失败!请检查设备是否连接正常");
+                    return;
+                }    
             });
         }
 

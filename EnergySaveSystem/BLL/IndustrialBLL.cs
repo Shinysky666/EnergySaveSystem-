@@ -22,7 +22,7 @@ namespace EnergySaveSystem.BLL
             {
                 SerialInfo serialinfo = new SerialInfo();
                 serialinfo.PortName = ConfigurationManager.AppSettings["port"].ToString();
-                serialinfo.BoundRate = int.Parse(ConfigurationManager.AppSettings["bound"].ToString());
+                serialinfo.BaudRate = int.Parse(ConfigurationManager.AppSettings["bound"].ToString());
                 serialinfo.DataBit = int.Parse(ConfigurationManager.AppSettings["databit"].ToString());
                 serialinfo.Parity_Check = (Parity)Enum.Parse(typeof(Parity),
                     ConfigurationManager.AppSettings["parity"].ToString(),true);
