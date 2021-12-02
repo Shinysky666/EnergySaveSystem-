@@ -18,6 +18,7 @@ namespace EnergySaveSystem.Base
 
         static bool IsRunging = true;
         static Task mainTask = null;
+        static RTU rtuInstance;
 
         public static void Start(Action SuccessAction, Action<string> FalseAction)
         {
@@ -59,8 +60,8 @@ namespace EnergySaveSystem.Base
                 }
 
                 //初始化串口通信
-                var rtu = RTU.GetInstance(serialInfo);
-                if(rtu.Connection())
+                rtuInstance = RTU.GetInstance(serialInfo);
+                if(rtuInstance.Connection())
                 {
                     SuccessAction();
                     //程序运行时不断刷新串口通信
@@ -80,6 +81,12 @@ namespace EnergySaveSystem.Base
         public static void Dispose()
         {
             IsRunging = false;
+
+            if (rtuInstance != null)
+            {
+                rtuInstance.Dispose();
+            }
+
             if (mainTask != null)
             {
                 mainTask.Wait();
