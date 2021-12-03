@@ -12,6 +12,10 @@ namespace Communication.Modbus
         private static RTU _instance;
         private static SerialInfo _serialInfo;
         SerialPort _serialPort;
+        bool isbusing;
+        int currentslaveAddr, totallen;
+        int receivebyteCount = 0;
+        byte[] bytebuffer = new byte[512];
 
         private RTU(SerialInfo serialInfo)
         {
@@ -56,11 +60,28 @@ namespace Communication.Modbus
 
         private void _serialPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
-            throw new NotImplementedException();
+            byte receivebytes;
+            while(_serialPort.BytesToRead>0)
+            {
+                receivebytes = (byte)_serialPort.ReadByte();
+                bytebuffer[receivebyteCount] = receivebytes;
+                receivebyteCount++;
+                if(receivebyteCount>=512)
+                {
+                    receivebyteCount = 0;
+                    //清除缓冲区
+                    _serialPort.DiscardInBuffer();
+                    return;
+                }
+            }
         }
 
         public async Task<bool> IsSendSuccess(int slaveAddr,byte funcCode,int startAddr,int len)
         {
+            currentslaveAddr = slaveAddr;
+            if (funcCode == 0x01)
+                totallen = len / 8 + ((len % 8 > 0) ? 1 : 0);
+
             List<byte> sendBuffer = new List<byte>();
             sendBuffer.Add((byte)slaveAddr);
             sendBuffer.Add(funcCode);
@@ -74,7 +95,11 @@ namespace Communication.Modbus
 
             try
             {
+                while(isbusing)
+                { }
+                isbusing = true;
                 _serialPort.Write(sendBuffer.ToArray(), 0, 8);
+                isbusing = false;
                 await Task.Delay(1000);
             }
             catch (Exception e)
