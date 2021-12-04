@@ -12,6 +12,7 @@ namespace EnergySaveSystem.Model
         public string DeviceId { get; set; }
         public string DeviceName { get; set; }
         public bool IsWarning { get; set; } = false;
+        public bool IsRuning { get; set; }
 
         public ObservableCollection<MonitorValueModel> MonitorValueList { get; set; } =
             new ObservableCollection<MonitorValueModel>();

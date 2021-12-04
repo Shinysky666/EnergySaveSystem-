@@ -13,12 +13,15 @@ namespace Communication.Modbus
         private static SerialInfo _serialInfo;
         SerialPort _serialPort;
         bool isbusing;
-        int currentslaveAddr, totallen;
+        int currentslaveAddr, totallen, currentstartAddr;
+        byte currentfuncCode;
         int receivebyteCount = 0;
         byte[] bytebuffer = new byte[512];
+        public Action<int, List<byte>> ResponseData;
 
         private RTU(SerialInfo serialInfo)
         {
+            _serialPort = new SerialPort();
             _serialInfo = serialInfo;
         }
 
@@ -55,7 +58,7 @@ namespace Communication.Modbus
             {
                 return false;
             }
-            return false;
+            return true;
         }
 
         private void _serialPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
@@ -73,14 +76,42 @@ namespace Communication.Modbus
                     _serialPort.DiscardInBuffer();
                     return;
                 }
+
+                if(bytebuffer[0] == (byte)currentslaveAddr && bytebuffer[1] == (byte)currentfuncCode 
+                    && receivebyteCount >= totallen+5)
+                {
+                    //检查Crc
+
+                    //返回数据
+                    ResponseData?.Invoke(currentstartAddr, 
+                        new List<byte>(SubByteArray(bytebuffer, 0, totallen + 3)));
+                    _serialPort.DiscardInBuffer();
+                }
+
+
             }
+        }
+
+        private byte[] SubByteArray(byte[] byteArr, int start, int len)
+        {
+            byte[] Res = new byte[len];
+            if (byteArr != null && byteArr.Length > len)
+            {
+                for (int i = 0; i < len; i++)
+                    Res[i] = byteArr[i + start];
+            }
+            return Res;
         }
 
         public async Task<bool> IsSendSuccess(int slaveAddr,byte funcCode,int startAddr,int len)
         {
             currentslaveAddr = slaveAddr;
+            currentfuncCode = funcCode;
+            currentstartAddr = startAddr;
             if (funcCode == 0x01)
                 totallen = len / 8 + ((len % 8 > 0) ? 1 : 0);
+            if (funcCode == 0x03)
+                totallen = len * 2;
 
             List<byte> sendBuffer = new List<byte>();
             sendBuffer.Add((byte)slaveAddr);
@@ -107,9 +138,9 @@ namespace Communication.Modbus
                 Console.WriteLine("RTU Exception" + e.Message);
                 return false;
             }
+            receivebyteCount = 0;
             return true;
         }
-
 
         public void Dispose()
         {
@@ -120,6 +151,10 @@ namespace Communication.Modbus
                 _serialPort = null; 
             }
         }
+
+
+
+        #region CRC校验
 
         /// <summary>
         /// CRC高位校验码checkCRCHigh
@@ -195,7 +230,7 @@ namespace Communication.Modbus
         /// <returns>该字节数组的奇偶校验字节</returns>
         private byte[] Crc16(byte[] data, int arrayLength)
         {
-            int i = 0;      
+            int i = 0;
             byte CRCHigh = 0xFF;
             byte CRCLow = 0xFF;
             UInt16 index = 0x0000;
@@ -208,6 +243,9 @@ namespace Communication.Modbus
             }
 
             return new byte[] { CRCLow, CRCHigh };
-        }    
+        }
+
+        #endregion
+
     }
 }

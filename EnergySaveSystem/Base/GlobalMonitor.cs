@@ -22,7 +22,7 @@ namespace EnergySaveSystem.Base
 
         public static void Start(Action SuccessAction, Action<string> FalseAction)
         {
-            mainTask = Task.Run(() =>
+            mainTask = Task.Run(async () =>
             {
                 IndustrialBLL industrialbll = new IndustrialBLL();
                 //获取串口配置信息
@@ -61,13 +61,28 @@ namespace EnergySaveSystem.Base
 
                 //初始化串口通信
                 rtuInstance = RTU.GetInstance(serialInfo);
-                if(rtuInstance.Connection())
+                rtuInstance.ResponseData = new Action<int, List<byte>>(ParsingData);
+                if (rtuInstance.Connection())
                 {
                     SuccessAction();
                     //程序运行时不断刷新串口通信
+                    int startAddr = 0;
                     while (IsRunging)
                     {
-
+                        foreach (var item in StorageList)
+                        {
+                            if(item.Length>100)
+                            {
+                                startAddr = item.StartAddress;
+                                int readCount = item.Length / 100;
+                                for (int i = 0; i < readCount; i++)
+                                {
+                                    int readLen = (i == readCount) ? item.Length - 100 * i : 100;
+                                    await rtuInstance.IsSendSuccess(item.SlaveAddress, (byte)int.Parse(item.FuncCode),
+                                        startAddr + 100 * (item.Length / 100), item.Length % 100);
+                                }
+                            }
+                        }
                     }
                 }
                 else
@@ -76,6 +91,43 @@ namespace EnergySaveSystem.Base
                     return;
                 }    
             });
+        }
+
+        private static void ParsingData(int start_addr, List<byte> bytelist)
+        {
+            if(bytelist!=null && bytelist.Count>0)
+            {
+                int startByte;
+                byte[] res = null;
+                //查找设备监控点位与当前返回报文相关的监控数据列表
+                //根据从站地址、功能码、起始地址查找
+                var mvl = (from q in DeviceList
+                           from m in q.MonitorValueList
+                           where m.StorageAreaId == 
+                           (bytelist[0].ToString() + bytelist[1].ToString("00") + start_addr.ToString())
+                           select m
+                           ).ToList();
+
+                foreach (var item in mvl)
+                {
+                    switch(item.DataType)
+                    {
+                        case "Float":
+                            startByte = item.StartAddress * 2 + 3;
+                            if(startByte < start_addr +bytelist.Count)
+                            {
+                                res = new byte[4] { bytelist[startByte],bytelist[startByte+1],bytelist[startByte+2],
+                                    bytelist[startByte+3]
+                                };
+                                item.CurrentValue = Convert.ToDouble(res.ByteArrsyToFloat());
+                            }
+                            break;
+                        case "Bool":
+                            break;
+                    }                  
+                }
+
+            }
         }
 
         public static void Dispose()

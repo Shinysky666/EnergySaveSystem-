@@ -83,7 +83,7 @@ namespace EnergySaveSystem.BLL
                     
                     //连表查询
                     foreach (var monitor in monitorvalues.AsEnumerable().
-                        Where(o=>o.Field<string>("id") == dmodel.DeviceId))
+                        Where(o=>o.Field<string>("d_id") == dmodel.DeviceId))
                     {
                         MonitorValueModel mvm = new MonitorValueModel();
                         dmodel.MonitorValueList.Add(mvm);
