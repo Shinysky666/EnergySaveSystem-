@@ -79,8 +79,13 @@ namespace EnergySaveSystem.Base
                                 {
                                     int readLen = (i == readCount) ? item.Length - 100 * i : 100;
                                     await rtuInstance.IsSendSuccess(item.SlaveAddress, (byte)int.Parse(item.FuncCode),
-                                        startAddr + 100 * (item.Length / 100), item.Length % 100);
+                                        startAddr + 100 * i, readLen);
                                 }
+                            }
+                            if(item.Length %100 >0)
+                            {
+                                await rtuInstance.IsSendSuccess(item.SlaveAddress, (byte)int.Parse(item.FuncCode),
+                                        startAddr + 100 * (item.Length / 100), item.Length % 100);
                             }
                         }
                     }

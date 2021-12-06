@@ -14,6 +14,7 @@ namespace EnergySaveSystem.BLL
 {
     public class IndustrialBLL
     {
+        DataAccess da = new DataAccess();
         //获取串口信息
         public DataResult<SerialInfo> InitSerialInfo()
         {
@@ -46,7 +47,7 @@ namespace EnergySaveSystem.BLL
             {
                 StorageAreaModel storageArea = new StorageAreaModel();
                 //获取数据库中StorageArea表数据 并将数据赋值给 DataResult中的Data
-                var value = DataAccess.instance.GetStorageArea();
+                var value = da.GetStorageArea();
                 result.State = true;
                 result.Data = (from data in value.AsEnumerable()
                                select new StorageAreaModel()
@@ -70,8 +71,8 @@ namespace EnergySaveSystem.BLL
             DataResult<List<DeviceModel>> result = new DataResult<List<DeviceModel>>();
             try
             {
-                var devices = DataAccess.instance.GetDevice();
-                var monitorvalues = DataAccess.instance.GetMonitorValues();
+                var devices = da.GetDevice();
+                var monitorvalues = da.GetMonitorValues();
                 List<DeviceModel> devicelist = new List<DeviceModel>();
 
                 foreach (var item in devices.AsEnumerable())
@@ -101,11 +102,11 @@ namespace EnergySaveSystem.BLL
                         var lolo = monitor.Field<string>("alarm_lolo");
                         mvm.LoLoAlarm = lolo == null ? 0.0 : double.Parse(lolo);
                         var low = monitor.Field<string>("alarm_low");
-                        mvm.LoLoAlarm = low == null ? 0.0 : double.Parse(low);
+                        mvm.LowAlarm = low == null ? 0.0 : double.Parse(low);
                         var high = monitor.Field<string>("alarm_high");
-                        mvm.LoLoAlarm = high == null ? 0.0 : double.Parse(high);
+                        mvm.HighAlarm = high == null ? 0.0 : double.Parse(high);
                         var hihi = monitor.Field<string>("alarm_hihi");
-                        mvm.LoLoAlarm = hihi == null ? 0.0 : double.Parse(hihi);
+                        mvm.HiHiAlarm = hihi == null ? 0.0 : double.Parse(hihi);
 
                         mvm.ValueStateChanged = (state, msg, value_id) =>
                         {

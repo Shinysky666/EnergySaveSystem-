@@ -11,7 +11,6 @@ namespace EnergySaveSystem.DAL
 {
     public class DataAccess
     {
-        public static DataAccess instance;
         string dbConfig = ConfigurationManager.ConnectionStrings["db_config"].ToString();
         MySqlConnection connection;
         MySqlCommand command;

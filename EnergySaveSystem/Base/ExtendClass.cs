@@ -10,9 +10,9 @@ namespace EnergySaveSystem.Base
     {
         public static float ByteArrsyToFloat(this byte[] value)
         {
-            float fValue = 0;
-            uint nRest = ((uint)value[2]) * 256 +
-                ((uint)value[3]) +
+            float fValue = 0f;
+            uint nRest = ((uint)value[2]) * 256
+                + ((uint)value[3]) +
                 65536 * (((uint)value[0]) * 256 + ((uint)value[1]));
             unsafe
             {
