@@ -10,6 +10,44 @@
         WindowStyle="None" AllowsTransparency="True" ResizeMode="CanResizeWithGrip" WindowStartupLocation="CenterScreen"
         MouseMove="Window_MouseMove"    
         >
+
+    <Window.Resources>
+        <Style TargetType="RadioButton" x:Key="NavTabButtonStyle">
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="Foreground" Value="#DDD"/>
+            <Setter Property="Padding" Value="10,5"/>
+            <Setter Property="Margin" Value="5,0"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="RadioButton">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="5,5,0,0">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <!--第一列-->
+                                <TextBlock Text="{TemplateBinding Tag}" FontFamily="Assets/Fonts/#iconfont"
+                                           FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10,0,0,0"/>
+                                <ContentPresenter Grid.Column="1" VerticalAlignment="{TemplateBinding VerticalAlignment}"
+                                                  HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                                                  Margin="{TemplateBinding Padding}"/>
+                            </Grid>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsChecked" Value="True">
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="Background" Value="#FF6800"/>
+                </Trigger>
+                         
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    
     <Grid>
         <Grid.Background>
             <RadialGradientBrush Center="0.5,0.7" GradientOrigin="0.5,0.7" RadiusY="0.8" RadiusX="0.8">
@@ -35,13 +73,13 @@
                 <Border Height="45" Background="Transparent" BorderBrush="#FF6800" BorderThickness="0,0,0,1"
                         Margin="10,0,0,0">
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" Margin="70,0,0,0">
-                        <RadioButton Content="系统监控" IsChecked="True"/>
-                        <RadioButton Content="系统监控"/>
-                        <RadioButton Content="系统监控"/>
-                        <RadioButton Content="系统监控"/>
-                        <RadioButton Content="系统监控"/>
-                        <RadioButton Content="系统监控"/>
-                        <RadioButton Content="系统监控"/>
+                        <RadioButton Content="系统监控" Tag="&#xe601;" IsChecked="True" Style="{StaticResource NavTabButtonStyle}"/>
+                        <RadioButton Content="实时曲线" Tag="&#xe604;" Style="{StaticResource NavTabButtonStyle}"/>
+                        <RadioButton Content="历史曲线" Tag="&#xe75c;" Style="{StaticResource NavTabButtonStyle}"/>
+                        <RadioButton Content="控制策略" Tag="&#xe684;" Style="{StaticResource NavTabButtonStyle}"/>
+                        <RadioButton Content="系统操作" Tag="&#xe600;" Style="{StaticResource NavTabButtonStyle}"/>
+                        <RadioButton Content="报警处理" Tag="&#xe62e;" Style="{StaticResource NavTabButtonStyle}"/>
+                        <RadioButton Content="报表管理" Tag="&#xe602;" Style="{StaticResource NavTabButtonStyle}"/>
                     </StackPanel>
                 </Border>
             </StackPanel>
