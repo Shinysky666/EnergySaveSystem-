@@ -13,7 +13,6 @@ D:\project\EnergySaveSystem\Controls\obj\Debug\Controls.dll
 D:\project\EnergySaveSystem\Controls\obj\Debug\Controls.pdb
 D:\Study\EnergySaveSystem\Controls\bin\Debug\Controls.dll
 D:\Study\EnergySaveSystem\Controls\bin\Debug\Controls.pdb
-D:\Study\EnergySaveSystem\Controls\obj\Debug\Controls.csproj.AssemblyReference.cache
 D:\Study\EnergySaveSystem\Controls\obj\Debug\UserControl1.g.cs
 D:\Study\EnergySaveSystem\Controls\obj\Debug\Controls_MarkupCompile.cache
 D:\Study\EnergySaveSystem\Controls\obj\Debug\Controls_MarkupCompile.lref
