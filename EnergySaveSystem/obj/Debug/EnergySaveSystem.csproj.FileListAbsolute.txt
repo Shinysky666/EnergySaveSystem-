@@ -121,3 +121,7 @@ E:\Study\EnergySaveSystem-\EnergySaveSystem\obj\Debug\EnergySaveSystem.csproj.Co
 E:\Study\EnergySaveSystem-\EnergySaveSystem\obj\Debug\EnergySaveSystem.exe
 E:\Study\EnergySaveSystem-\EnergySaveSystem\obj\Debug\EnergySaveSystem.pdb
 D:\Study\EnergySaveSystem\EnergySaveSystem\obj\Debug\Assets\Styles\ImageButtonStyle.baml
+D:\Study\EnergySaveSystem\EnergySaveSystem\obj\Debug\View\SystemMonitor.g.cs
+D:\Study\EnergySaveSystem\EnergySaveSystem\obj\Debug\View\SystemMonitor.baml
+D:\Study\EnergySaveSystem\EnergySaveSystem\obj\Debug\View\ReportManagement.g.cs
+D:\Study\EnergySaveSystem\EnergySaveSystem\obj\Debug\View\ReportManagement.baml

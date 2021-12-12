@@ -17,8 +17,10 @@ namespace EnergySaveSystem
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
+            new MainWindow().Show();
 
-            GlobalMonitor.Start(
+
+            /*GlobalMonitor.Start(
                 () =>
                 {
                     Application.Current.Dispatcher.Invoke(() =>
@@ -26,7 +28,7 @@ namespace EnergySaveSystem
                         new MainWindow().Show();
                     });
                 },
-                (msg) => 
+                (msg) =>
                 {
                     Application.Current.Dispatcher.Invoke(() =>
                     {
@@ -34,7 +36,7 @@ namespace EnergySaveSystem
                         MessageBox.Show(msg, "系统启动失败");
                         Application.Current.Shutdown();
                     });
-                });
+                });*/
         }
     }
 }

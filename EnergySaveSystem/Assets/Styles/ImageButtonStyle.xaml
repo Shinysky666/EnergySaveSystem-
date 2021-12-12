@@ -2,27 +2,29 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <Style TargetType="Button" x:Key="ImageButtonStyle">
-        <Setter Property="FontFamily" Value="Assets/Fonts/#iconfont"/>
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="Foreground" Value="White"/>
-        <Setter Property="Width" Value="40"/>
-        <Setter Property="Height" Value="30"/>
+        <Setter Property="Width" Value="50"/>
+        <Setter Property="Height" Value="40"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <Border Background="{TemplateBinding Background}">
-                        <ContentPresenter VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                          Margin="{TemplateBinding Padding}"/>
+                    <Border Background="Transparent" Name="back">
+                        <TextBlock Text="{Binding Content,RelativeSource={RelativeSource AncestorType=Button, Mode=FindAncestor}}"
+                                   VerticalAlignment="Center" HorizontalAlignment="Center"
+                                   FontFamily="../Fonts/#iconfont" FontSize="{TemplateBinding FontSize}"/>
                     </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="back" Property="Background" Value="#22FFFFFF"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="back" Property="Background" Value="#88FFFFFF"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-        <Style.Triggers>
-            <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="#22FFFFFF"/>
-            </Trigger>
-        </Style.Triggers>
     </Style>
     
 </ResourceDictionary>

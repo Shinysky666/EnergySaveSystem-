@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 D:\Study\EnergySaveSystem\EnergySaveSystem\App.xaml
-2-1224140178
+4-1256653831
 
-151922270471
+201051860949
 34-945303894
-Assets\Styles\ImageButtonStyle.xaml;MainWindow.xaml;
+Assets\Styles\ImageButtonStyle.xaml;MainWindow.xaml;View\ReportManagement.xaml;View\SystemMonitor.xaml;
 
 True
 

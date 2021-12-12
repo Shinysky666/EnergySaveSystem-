@@ -15,7 +15,7 @@
         <ResourceDictionary>
             <!--合并资源-->
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Assets/Styles/ImageButtonStyle.xaml"/>
+                <ResourceDictionary Source="./Assets/Styles/ImageButtonStyle.xaml"/>
                 <ResourceDictionary>
                     <Style TargetType="RadioButton" x:Key="NavTabButtonStyle">
                         <Setter Property="FontSize" Value="15"/>
@@ -23,6 +23,7 @@
                         <Setter Property="Padding" Value="10,5"/>
                         <Setter Property="Margin" Value="5,0"/>
                         <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="Command" Value="{Binding TabChangedCommand}"/>
                         <Setter Property="Template">
                             <Setter.Value>
                                 <ControlTemplate TargetType="RadioButton">
@@ -33,7 +34,7 @@
                                                 <ColumnDefinition/>
                                             </Grid.ColumnDefinitions>
                                             <!--第一列-->
-                                            <TextBlock Text="{TemplateBinding Tag}" FontFamily="Assets/Fonts/#iconfont"
+                                            <TextBlock Text="{TemplateBinding Tag}" FontFamily="./Assets/Fonts/#iconfont"
                                            FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10,0,0,0"/>
                                             <ContentPresenter Grid.Column="1" VerticalAlignment="{TemplateBinding VerticalAlignment}"
                                                   HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
@@ -70,34 +71,61 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
+        <!--第一行-->
         <Grid>
             <Border Width="55" Height="50" HorizontalAlignment="Left" Margin="10,0,20,0">
                 <Border.Background>
-                    <ImageBrush ImageSource="Assets/Images/logo.png"/>
+                    <ImageBrush ImageSource="./Assets/Images/logo.png"/>
                 </Border.Background>
             </Border>
+            <!--右上角最小最大关闭按钮-->
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right">
+                <Button Content="&#xe6bf;" Style="{StaticResource ImageButtonStyle}" FontSize="25"/>
+                <Button Content="&#xe63e;" Style="{StaticResource ImageButtonStyle}" FontSize="18"/>
+                <Button Content="&#xe625;" Style="{StaticResource ImageButtonStyle}" FontSize="18" Click="Button_Click"/>
+            </StackPanel>
+            <!--用户图像名字-->
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                        Margin="20,15">
+                <Border Width="30" Height="30" CornerRadius="15" BorderThickness="1" BorderBrush="White">
+                    <Border.Effect>
+                        <DropShadowEffect BlurRadius="5" ShadowDepth="0" Direction="0" Opacity="0.4" Color="White"/>
+                    </Border.Effect>
+                    <Border.Background>
+                        <ImageBrush ImageSource="./Assets/Images/avatar.png"/>
+                    </Border.Background>
+                </Border>
+                <TextBlock Text="为所欲为" FontSize="14" VerticalAlignment="Center" Foreground="White"
+                           Margin="10,0"/>
+            </StackPanel>
+            
+            <!--下边各菜单栏-->
             <StackPanel VerticalAlignment="Center">
                 <TextBlock Text="节能管理控制系统" Foreground="White" Margin="85,0,0,0" FontSize="25"/>
                 <Border Height="45" Background="Transparent" BorderBrush="#FF6800" BorderThickness="0,0,0,1"
                         Margin="10,0,0,0">
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" Margin="70,0,0,0">
-                        <RadioButton Content="系统监控" Tag="&#xe601;" IsChecked="True" Style="{StaticResource NavTabButtonStyle}"/>
+                        <RadioButton Content="系统监控" Tag="&#xe601;" IsChecked="True" Style="{StaticResource NavTabButtonStyle}"
+                                     CommandParameter="EnergySaveSystem.View.SystemMonitor"/>
                         <RadioButton Content="实时曲线" Tag="&#xe604;" Style="{StaticResource NavTabButtonStyle}"/>
                         <RadioButton Content="历史曲线" Tag="&#xe75c;" Style="{StaticResource NavTabButtonStyle}"/>
                         <RadioButton Content="控制策略" Tag="&#xe684;" Style="{StaticResource NavTabButtonStyle}"/>
                         <RadioButton Content="系统操作" Tag="&#xe600;" Style="{StaticResource NavTabButtonStyle}"/>
                         <RadioButton Content="报警处理" Tag="&#xe62e;" Style="{StaticResource NavTabButtonStyle}"/>
-                        <RadioButton Content="报表管理" Tag="&#xe602;" Style="{StaticResource NavTabButtonStyle}"/>
+                        <RadioButton Content="报表管理" Tag="&#xe602;" Style="{StaticResource NavTabButtonStyle}"
+                                     CommandParameter="EnergySaveSystem.View.ReportManagement"/>
                     </StackPanel>
                 </Border>
             </StackPanel>
-            <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right">
-                <Button Content="&#xe6bf;" Style="{DynamicResource ImageButtonStyle}" FontSize="14"/>
-                <Button Content="&#xe63e;" Style="{DynamicResource ImageButtonStyle}" FontSize="10"/>
-                <Button Content="&#xe625;" Style="{DynamicResource ImageButtonStyle}" Click="Button_Click"/>
-            </StackPanel>
+            
+            
+            
         </Grid>
-        
-        
+
+        <!--第二行-->
+        <ContentControl Grid.Row="1" Content="{Binding MainContent}">
+            
+        </ContentControl>
+
     </Grid>
 </Window>

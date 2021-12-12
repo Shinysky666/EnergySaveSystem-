@@ -100,6 +100,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Base\CommandBase.cs" />
+    <Compile Include="ViewModel\MainWindowViewModel.cs" />
+    <Compile Include="View\ReportManagement.xaml.cs">
+      <DependentUpon>ReportManagement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\SystemMonitor.xaml.cs">
+      <DependentUpon>SystemMonitor.xaml</DependentUpon>
+    </Compile>
     <Page Include="Assets\Styles\ImageButtonStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -114,6 +122,7 @@
     </Compile>
     <Compile Include="Base\ExtendClass.cs" />
     <Compile Include="Base\GlobalMonitor.cs" />
+    <Compile Include="Base\NotifyPropertyBase.cs" />
     <Compile Include="BLL\DataResult.cs" />
     <Compile Include="BLL\IndustrialBLL.cs" />
     <Compile Include="DAL\DataAccess.cs" />
@@ -121,6 +130,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\ReportManagement.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\SystemMonitor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\DeviceModel.cs" />
@@ -154,10 +171,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ViewModel\" />
-    <Folder Include="View\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Communication\Communication.csproj">
       <Project>{ebd26bcc-d57c-4e4a-a2ed-d2972f39976e}</Project>
