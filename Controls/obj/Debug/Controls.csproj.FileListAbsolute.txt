@@ -13,10 +13,8 @@ D:\project\EnergySaveSystem\Controls\obj\Debug\Controls.dll
 D:\project\EnergySaveSystem\Controls\obj\Debug\Controls.pdb
 D:\Study\EnergySaveSystem\Controls\bin\Debug\Controls.dll
 D:\Study\EnergySaveSystem\Controls\bin\Debug\Controls.pdb
-D:\Study\EnergySaveSystem\Controls\obj\Debug\UserControl1.g.cs
 D:\Study\EnergySaveSystem\Controls\obj\Debug\Controls_MarkupCompile.cache
 D:\Study\EnergySaveSystem\Controls\obj\Debug\Controls_MarkupCompile.lref
-D:\Study\EnergySaveSystem\Controls\obj\Debug\UserControl1.baml
 D:\Study\EnergySaveSystem\Controls\obj\Debug\Controls.g.resources
 D:\Study\EnergySaveSystem\Controls\obj\Debug\Controls.Properties.Resources.resources
 D:\Study\EnergySaveSystem\Controls\obj\Debug\Controls.csproj.GenerateResource.cache
@@ -36,3 +34,6 @@ E:\Study\EnergySaveSystem-\Controls\obj\Debug\Controls.csproj.GenerateResource.c
 E:\Study\EnergySaveSystem-\Controls\obj\Debug\Controls.csproj.CoreCompileInputs.cache
 E:\Study\EnergySaveSystem-\Controls\obj\Debug\Controls.dll
 E:\Study\EnergySaveSystem-\Controls\obj\Debug\Controls.pdb
+D:\Study\EnergySaveSystem\Controls\obj\Debug\Controls.csproj.AssemblyReference.cache
+D:\Study\EnergySaveSystem\Controls\obj\Debug\CircularProgressBar.g.cs
+D:\Study\EnergySaveSystem\Controls\obj\Debug\CircularProgressBar.baml
