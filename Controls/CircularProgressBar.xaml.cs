@@ -24,5 +24,30 @@ namespace Controls
         {
             InitializeComponent();
         }
+
+
+
+        public double Value
+        {
+            get { return (double)GetValue(ValueProperty); }
+            set { SetValue(ValueProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Value.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ValueProperty =
+            DependencyProperty.Register("Value", typeof(double), typeof(CircularProgressBar), new PropertyMetadata(
+                default(double),new PropertyChangedCallback(OnpropertyChanged)));
+
+        private static void OnpropertyChanged(DependencyObject d,DependencyPropertyChangedEventArgs e)
+        {
+            (d as CircularProgressBar).UpdateValue();
+        }
+
+        private void UpdateValue()
+        {
+
+        }
+
+
     }
 }

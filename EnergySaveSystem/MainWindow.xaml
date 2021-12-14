@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EnergySaveSystem"
+
         mc:Ignorable="d"
         FontFamily="Microsoft YaHei" FontWeight="ExtraLight"
         Title="节能管理控制系统" Height="750" Width="1300"
@@ -53,6 +54,7 @@
                         </Style.Triggers>
                     </Style>
                 </ResourceDictionary>
+     
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
@@ -126,6 +128,8 @@
         <ContentControl Grid.Row="1" Content="{Binding MainContent}">
             
         </ContentControl>
+        
+        
 
     </Grid>
 </Window>

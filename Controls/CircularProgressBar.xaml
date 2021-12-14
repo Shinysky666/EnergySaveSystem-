@@ -11,7 +11,13 @@
                  Height="{Binding ElementName=gridlayout,Path=Height}"
                  StrokeThickness="6"
                  Stroke="#EEE"/>
-        <Path Name="Arcpath" Data=""/>
-
+        <Path Name="Arcpath" Data="M75 3A75 75 0 0 1 147 75" StrokeThickness="4" Stroke="Orange" 
+              StrokeStartLineCap="Round" StrokeEndLineCap="Round"/>
+        <Viewbox Margin="20">
+            <TextBlock Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Run Text="100" FontSize="20"/>
+                <Run Text="%"/>
+            </TextBlock>
+        </Viewbox>
     </Grid>
 </UserControl>
