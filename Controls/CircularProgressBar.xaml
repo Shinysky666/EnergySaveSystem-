@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Controls"
              mc:Ignorable="d" 
              d:DesignHeight="150" d:DesignWidth="150">
-    <Grid Height="{Binding RelativeSource={RelativeSource Self},Path=ActualWidth}" Name="gridlayout">
+    <Grid Height="{Binding RelativeSource={RelativeSource Self},Path=Width}" Name="gridlayout">
         <Ellipse Width="{Binding ElementName=gridlayout,Path = Width}"
                  Height="{Binding ElementName=gridlayout,Path=Height}"
                  StrokeThickness="6"
@@ -15,7 +15,7 @@
               StrokeStartLineCap="Round" StrokeEndLineCap="Round"/>
         <Viewbox Margin="20">
             <TextBlock Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center">
-                <Run Text="100" FontSize="20"/>
+                <Run Text="{Binding Value,RelativeSource={RelativeSource AncestorType=UserControl,Mode=FindAncestor}}" FontSize="20"/>
                 <Run Text="%"/>
             </TextBlock>
         </Viewbox>
