@@ -6,7 +6,6 @@ D:\project\EnergySaveSystem\Communication\obj\Debug\Communication.dll
 D:\project\EnergySaveSystem\Communication\obj\Debug\Communication.pdb
 D:\Study\EnergySaveSystem\Communication\bin\Debug\Communication.dll
 D:\Study\EnergySaveSystem\Communication\bin\Debug\Communication.pdb
-D:\Study\EnergySaveSystem\Communication\obj\Debug\Communication.csproj.AssemblyReference.cache
 D:\Study\EnergySaveSystem\Communication\obj\Debug\Communication.csproj.CoreCompileInputs.cache
 D:\Study\EnergySaveSystem\Communication\obj\Debug\Communication.dll
 D:\Study\EnergySaveSystem\Communication\obj\Debug\Communication.pdb

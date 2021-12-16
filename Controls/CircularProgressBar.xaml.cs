@@ -60,8 +60,10 @@ namespace Controls
             newX = radius + (radius - 3) * Math.Cos((this.Value % 100 * 3.6 - 90) * Math.PI / 180);
             newY = radius + (radius - 3) * Math.Sin((this.Value % 100 * 3.6 - 90) * Math.PI / 180);
 
-            string pathDataStr = "M{0} 3A{1} {1} 0 0 1 {2} {3}";
-            pathDataStr = string.Format(pathDataStr, radius, radius - 3, newX, newY);
+            string pathDataStr = "M{0} 3A{1} {1} 0 {4} 1 {2} {3}";
+            pathDataStr = string.Format(pathDataStr, radius + 0.01, radius - 3, newX, newY,
+                                        this.Value % 100 > 50 ? 1 : 0
+                                        );
 
             //图形转换
             var converter = TypeDescriptor.GetConverter(typeof(Geometry));
