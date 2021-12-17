@@ -10,8 +10,12 @@
         <Ellipse Width="{Binding ElementName=gridlayout,Path = Width}"
                  Height="{Binding ElementName=gridlayout,Path=Height}"
                  StrokeThickness="6"
-                 Stroke="#EEE"/>
-        <Path Name="Arcpath" StrokeThickness="4" Stroke="Orange" 
+                 Stroke="#EEE">
+            <Ellipse.Effect>
+                <DropShadowEffect ShadowDepth="0" Direction="0" Color="White" BlurRadius="5"/>
+            </Ellipse.Effect>
+        </Ellipse>
+        <Path Name="Arcpath" StrokeThickness="4" Stroke="{Binding ForeColor,RelativeSource={RelativeSource AncestorType=UserControl,Mode=FindAncestor}}" 
               StrokeStartLineCap="Round" StrokeEndLineCap="Round"/>
         <Viewbox Margin="20">
             <TextBlock Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center">

@@ -41,8 +41,19 @@ namespace Controls
 
         // 依赖属性
         public static readonly DependencyProperty ValueProperty =
-            DependencyProperty.Register("Value", typeof(double), typeof(CircularProgressBar), new PropertyMetadata(
-                default(double),new PropertyChangedCallback(OnpropertyChanged)));
+            DependencyProperty.Register("Value", typeof(double), typeof(CircularProgressBar), 
+                new PropertyMetadata(default(double),new PropertyChangedCallback(OnpropertyChanged)));
+
+        public Brush ForeColor
+        {
+            get { return (Brush)GetValue(ForeColorProperty); }
+            set { SetValue(ForeColorProperty, value); }
+        }
+
+        // 依赖属性
+        public static readonly DependencyProperty ForeColorProperty =
+            DependencyProperty.Register("ForeColor", typeof(Brush), typeof(CircularProgressBar), 
+                new PropertyMetadata(Brushes.Orange));
 
         private static void OnpropertyChanged(DependencyObject d,DependencyPropertyChangedEventArgs e)
         {
@@ -52,17 +63,18 @@ namespace Controls
         private void UpdateValue()
         {
             // double radius= Math.Min(this.RenderSize.Width, this.RenderSize.Height)/2 ;
+            double newValue = this.Value % 100;
             double newX = 0.0, newY = 0.0;
             double radius = this.gridlayout.Width / 2;
             if (radius < 0)
                 return;
 
-            newX = radius + (radius - 3) * Math.Cos((this.Value % 100 * 3.6 - 90) * Math.PI / 180);
-            newY = radius + (radius - 3) * Math.Sin((this.Value % 100 * 3.6 - 90) * Math.PI / 180);
+            newX = radius + (radius - 3) * Math.Cos((newValue * 3.6 - 90) * Math.PI / 180);
+            newY = radius + (radius - 3) * Math.Sin((newValue * 3.6 - 90) * Math.PI / 180);
 
             string pathDataStr = "M{0} 3A{1} {1} 0 {4} 1 {2} {3}";
             pathDataStr = string.Format(pathDataStr, radius + 0.01, radius - 3, newX, newY,
-                                        this.Value % 100 > 50 ? 1 : 0
+                                        newValue > 0 && newValue < 50 ? 0 : 1
                                         );
 
             //图形转换
