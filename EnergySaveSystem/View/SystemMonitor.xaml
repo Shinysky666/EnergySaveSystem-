@@ -7,15 +7,45 @@
              xmlns:yhjControl ="clr-namespace:Controls;assembly=Controls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+
     <Grid>
         <Canvas/>
-
-        <Grid VerticalAlignment="Top">
+        <Grid VerticalAlignment="Top" Margin="20,10">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="320"/>
                 <ColumnDefinition/>
                 <ColumnDefinition Width="300"/>
             </Grid.ColumnDefinitions>
+
+            <!--左侧设备详情-->
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Text="冷却塔 #1" Foreground="White" FontSize="20"/>
+                
+                <ItemsControl Grid.Row="1">
+                    <TextBlock Text="测试"/>
+                </ItemsControl>
+                
+                <StackPanel Orientation="Horizontal" Grid.Row="2">
+                    <TextBlock Text="实时状态: "/>
+                    <ToggleButton/>
+                </StackPanel>
+                <ToggleButton Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+
+                <ItemsControl Grid.Row="3">
+                    
+                </ItemsControl>
+
+            </Grid>
+
+
+            <!--右侧全局监控数据-->
             <Grid Grid.Column="2">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>
@@ -26,21 +56,60 @@
                 </Grid.RowDefinitions>
                 <TextBlock Text="系统总览" FontSize="16" Foreground="White" HorizontalAlignment="Right"
                            Margin="0,0,20,0"/>
+                <!--监控值-->
                 <UniformGrid Rows="1" Grid.Row="1" Margin="0,40,0,0">
                     <StackPanel>
                         <TextBlock Text="监控值" HorizontalAlignment="Center" Foreground="White"/>
-                        <yhjControl:CircularProgressBar Value="100" Height="60" ForeColor="#20c9b4" Margin="0,10"/>
+                        <yhjControl:CircularProgressBar Value="90" Height="60" ForeColor="#20c9b4" Margin="0,10"/>
                     </StackPanel>
                     <StackPanel>
                         <TextBlock Text="监控值" HorizontalAlignment="Center" Foreground="White"/>
-                        <yhjControl:CircularProgressBar Value="70" Height="60" Margin="0,10"/>
+                        <yhjControl:CircularProgressBar Value="60" Height="60" Margin="0,10"/>
                     </StackPanel>
                     <StackPanel>
                         <TextBlock Text="监控值" HorizontalAlignment="Center" Foreground="White"/>
-                        <yhjControl:CircularProgressBar Value="30" Height="60" ForeColor="#38baec" Margin="0,10"/>
+                        <yhjControl:CircularProgressBar Value="70" Height="60" ForeColor="#38baec" Margin="0,10"/>
                     </StackPanel>
-
                 </UniformGrid>
+
+                <TextBlock Grid.Row="2" Text="实时日志" FontSize="15" Foreground="#44FFFFFF" Margin="5,10"/>
+                <TextBlock Grid.Row="2" Margin="5" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="15">
+                    <Hyperlink Foreground="#66DFFDFF">详情</Hyperlink>
+                </TextBlock>
+
+                <!--实时日志内容打印-->
+                <ItemsControl Grid.Row="3" ItemsSource="{Binding Loglist}" AlternationCount="2">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Border Background="#11FFFFFF" Name="Loglistback" Visibility="Collapsed" CornerRadius="14"/>
+                                <Grid TextBlock.Foreground="White" TextBlock.FontSize="10" Height="40">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="40"/>
+                                        <ColumnDefinition Width="80"/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition Width="auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="{Binding RowNumber,StringFormat=\{0:00\}}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                    <TextBlock Grid.Column="1" Text="{Binding DeviceName}" VerticalAlignment="Center"/>
+                                    <TextBlock Grid.Column="2" Text="{Binding LogInfo}" VerticalAlignment="Center"/>
+                                    <Border Grid.Column="3" Height="30" CornerRadius="0,13,13,0" Name="type_back" Margin="0,1,1,1">
+                                        <TextBlock Text="{Binding LogType}" VerticalAlignment="Center" Margin="8,0"/>
+                                    </Border>
+                                </Grid>
+                            </Grid>
+                            <DataTemplate.Triggers>
+                                <Trigger Property="ItemsControl.AlternationIndex" Value="0">
+                                    <Setter Property="Visibility" Value="Visible" TargetName="Loglistback"/>
+                                </Trigger>
+                                <DataTrigger Binding="{Binding LogType}" Value="Warn">
+                                    <Setter Property="Background" Value="#66FF0000" TargetName="type_back"/>
+                                </DataTrigger>
+                            </DataTemplate.Triggers>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+
             </Grid>
         </Grid>
     </Grid>

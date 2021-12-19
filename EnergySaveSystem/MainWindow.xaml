@@ -82,9 +82,9 @@
             </Border>
             <!--右上角最小最大关闭按钮-->
             <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right">
-                <Button Content="&#xe6bf;" Style="{StaticResource ImageButtonStyle}" FontSize="25"/>
-                <Button Content="&#xe63e;" Style="{StaticResource ImageButtonStyle}" FontSize="18"/>
-                <Button Content="&#xe625;" Style="{StaticResource ImageButtonStyle}" FontSize="18" Click="Button_Click"/>
+                <Button Content="&#xe6bf;" Style="{StaticResource ImageButtonStyle}" FontSize="20"/>
+                <Button Content="&#xe63e;" Style="{StaticResource ImageButtonStyle}" FontSize="15" />
+                <Button Content="&#xe625;" Style="{StaticResource ImageButtonStyle}" FontSize="15" Click="Button_Click"/>
             </StackPanel>
             <!--用户图像名字-->
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom"
