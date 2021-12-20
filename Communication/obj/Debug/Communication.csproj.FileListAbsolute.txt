@@ -15,4 +15,3 @@ E:\Study\EnergySaveSystem-\Communication\obj\Debug\Communication.csproj.Assembly
 E:\Study\EnergySaveSystem-\Communication\obj\Debug\Communication.csproj.CoreCompileInputs.cache
 E:\Study\EnergySaveSystem-\Communication\obj\Debug\Communication.dll
 E:\Study\EnergySaveSystem-\Communication\obj\Debug\Communication.pdb
-D:\Study\EnergySaveSystem\Communication\obj\Debug\Communication.csproj.AssemblyReference.cache

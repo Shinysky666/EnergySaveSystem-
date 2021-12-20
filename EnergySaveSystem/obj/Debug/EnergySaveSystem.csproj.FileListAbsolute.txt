@@ -125,3 +125,10 @@ D:\Study\EnergySaveSystem\EnergySaveSystem\obj\Debug\View\SystemMonitor.g.cs
 D:\Study\EnergySaveSystem\EnergySaveSystem\obj\Debug\View\SystemMonitor.baml
 D:\Study\EnergySaveSystem\EnergySaveSystem\obj\Debug\View\ReportManagement.g.cs
 D:\Study\EnergySaveSystem\EnergySaveSystem\obj\Debug\View\ReportManagement.baml
+D:\Study\EnergySaveSystem\EnergySaveSystem\bin\Debug\LiveCharts.dll
+D:\Study\EnergySaveSystem\EnergySaveSystem\bin\Debug\LiveCharts.Wpf.dll
+D:\Study\EnergySaveSystem\EnergySaveSystem\bin\Debug\LiveCharts.pdb
+D:\Study\EnergySaveSystem\EnergySaveSystem\bin\Debug\LiveCharts.xml
+D:\Study\EnergySaveSystem\EnergySaveSystem\bin\Debug\LiveCharts.Wpf.pdb
+D:\Study\EnergySaveSystem\EnergySaveSystem\bin\Debug\LiveCharts.Wpf.xml
+D:\Study\EnergySaveSystem\EnergySaveSystem\obj\Debug\GeneratedInternalTypeHelper.g.cs

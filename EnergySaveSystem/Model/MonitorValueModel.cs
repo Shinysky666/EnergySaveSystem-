@@ -1,4 +1,6 @@
-﻿using System;
+﻿using LiveCharts;
+using LiveCharts.Defaults;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -61,11 +63,18 @@ namespace EnergySaveSystem.Model
                     msg += "极低";
                     state = MonitorValueState.LoLo;
                 }                  
-                ValueStateChanged(state, msg + " 当前值: " + value.ToString(),ValueId);
+                //ValueStateChanged(state, msg + " 当前值: " + value.ToString(),ValueId);
+
+                LivecharValues.Add(new ObservableValue(value));
+                if (LivecharValues.Count > 60)
+                    LivecharValues.RemoveAt(0);
             }
         }
 
-    }
+        //LiveCharts绘制左侧设备详情
+        public ChartValues<ObservableValue> LivecharValues { get; set; } = new ChartValues<ObservableValue>();
+
+    }   
 
     
 }

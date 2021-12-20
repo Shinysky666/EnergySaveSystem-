@@ -24,7 +24,6 @@ namespace EnergySaveSystem.View
         public SystemMonitor()
         {
             InitializeComponent();
-            this.DataContext = new SystemMonitorViewModel();
         }
     }
 }

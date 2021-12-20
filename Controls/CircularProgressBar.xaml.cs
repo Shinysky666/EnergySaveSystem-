@@ -74,7 +74,7 @@ namespace Controls
 
             string pathDataStr = "M{0} 3A{1} {1} 0 {4} 1 {2} {3}";
             pathDataStr = string.Format(pathDataStr, radius + 0.01, radius - 3, newX, newY,
-                                        newValue > 0 && newValue < 50 ? 0 : 1
+                                        newValue >= 0 && newValue < 50 ? 0 : 1
                                         );
 
             //图形转换
