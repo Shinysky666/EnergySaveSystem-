@@ -40,30 +40,32 @@ namespace EnergySaveSystem.Model
             set 
             { 
                 _currentValue = value;
-                string msg = ValueDesc;
-                MonitorValueState state = MonitorValueState.OK;
-
-                if (value > HiHiAlarm)
+                if (IsAlarm)
                 {
-                    msg += "极高";
-                    state = MonitorValueState.HiHi;
+                    string msg = ValueDesc;
+                    MonitorValueState state = MonitorValueState.OK;
+                    if (value > HiHiAlarm)
+                    {
+                        msg += "极高";
+                        state = MonitorValueState.HiHi;
+                    }
+                    else if (value > HighAlarm)
+                    {
+                        msg += "过高";
+                        state = MonitorValueState.High;
+                    }
+                    else if (value < LowAlarm)
+                    {
+                        msg += "过低";
+                        state = MonitorValueState.Low;
+                    }
+                    else if (value < LoLoAlarm)
+                    {
+                        msg += "极低";
+                        state = MonitorValueState.LoLo;
+                    }
+                    ValueStateChanged(state, msg + " 当前值: " + value.ToString(), ValueId);
                 }
-                else if (value > HighAlarm)
-                {
-                    msg += "过高";
-                    state = MonitorValueState.High;
-                }
-                else if (value < LowAlarm)
-                {
-                    msg += "过低";
-                    state = MonitorValueState.Low;
-                }               
-                else if (value < LoLoAlarm)
-                {
-                    msg += "极低";
-                    state = MonitorValueState.LoLo;
-                }                  
-                //ValueStateChanged(state, msg + " 当前值: " + value.ToString(),ValueId);
 
                 LivecharValues.Add(new ObservableValue(value));
                 if (LivecharValues.Count > 60)

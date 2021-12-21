@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:EnergySaveSystem.View"
              xmlns:yhjControl ="clr-namespace:Controls;assembly=Controls"
              xmlns:yhjvm ="clr-namespace:EnergySaveSystem.ViewModel"
+             xmlns:lvc ="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     
@@ -34,7 +35,42 @@
 
                 <TextBlock Text="{Binding DeviceName}" Foreground="White" FontSize="20"/>
 
-                <ItemsControl Grid.Row="1" ItemsSource="{Binding MonitorValueList}" Foreground="White"/>
+                <ItemsControl Grid.Row="1" ItemsSource="{Binding MonitorValueList}" Foreground="White">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="60"/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="30"/>
+                                    <ColumnDefinition Width="30"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="{Binding ValueName,StringFormat=\{0\}:}" Foreground="#99FFFFFF"/>
+                                <lvc:CartesianChart Grid.Column="1" MinHeight="30" DataTooltip="{x:Null}">
+                                    <lvc:CartesianChart.Series>
+                                        <lvc:LineSeries Fill="Transparent" Values="{Binding LivecharValues}">
+                                            <lvc:LineSeries.Stroke>
+                                                <LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
+                                                    <GradientStop Color="Orange" Offset="0.5"/>
+                                                    <GradientStop Color="#00FFFFFF" Offset="0"/>
+                                                    <GradientStop Color="#FFFFE2AE" Offset="0.1"/>
+                                                </LinearGradientBrush>
+                                            </lvc:LineSeries.Stroke>
+                                        </lvc:LineSeries>
+                                    </lvc:CartesianChart.Series>
+                                    <lvc:CartesianChart.AxisX>
+                                        <lvc:Axis ShowLabels="False"/>
+                                    </lvc:CartesianChart.AxisX>
+                                    <lvc:CartesianChart.AxisY>
+                                        <lvc:Axis ShowLabels="False"/>
+                                    </lvc:CartesianChart.AxisY>
+                                </lvc:CartesianChart>
+                                <TextBlock Grid.Column="2" Text="{Binding CurrentValue}" HorizontalAlignment="Right" Margin="0,0,5,0"/>
+                                <TextBlock Grid.Column="3" Text="{Binding Unit}"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
 
                 <StackPanel Orientation="Horizontal" Grid.Row="2">
                     <TextBlock Text="实时状态: "/>
