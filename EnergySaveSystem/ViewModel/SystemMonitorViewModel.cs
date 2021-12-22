@@ -59,42 +59,60 @@ namespace EnergySaveSystem.ViewModel
                 ValueId="1",
                 ValueName = "液位",
                 Unit = "m",
-                CurrentValue = 0
+                CurrentValue = 0,
+                LivecharValues = new LiveCharts.ChartValues<LiveCharts.Defaults.ObservableValue>{
+                    new LiveCharts.Defaults.ObservableValue(0),new LiveCharts.Defaults.ObservableValue(0)
+                }
             });
             testdevice.MonitorValueList.Add(new MonitorValueModel
             {
                 ValueId = "1",
                 ValueName = "入口压力",
                 Unit = "Mpa",
-                CurrentValue = 30
+                CurrentValue = 30,
+                LivecharValues = new LiveCharts.ChartValues<LiveCharts.Defaults.ObservableValue>{
+                    new LiveCharts.Defaults.ObservableValue(0),new LiveCharts.Defaults.ObservableValue(2)
+                }
             });
             testdevice.MonitorValueList.Add(new MonitorValueModel
             {
                 ValueId = "1",
                 ValueName = "入口温度",
                 Unit = "℃",
-                CurrentValue = 35
+                CurrentValue = 35,
+                LivecharValues = new LiveCharts.ChartValues<LiveCharts.Defaults.ObservableValue>{
+                    new LiveCharts.Defaults.ObservableValue(0),new LiveCharts.Defaults.ObservableValue(0)
+                }
             });
             testdevice.MonitorValueList.Add(new MonitorValueModel
             {
                 ValueId = "1",
                 ValueName = "出口压力",
                 Unit = "Mpa",
-                CurrentValue = 25
+                CurrentValue = 25,
+                LivecharValues = new LiveCharts.ChartValues<LiveCharts.Defaults.ObservableValue>{
+                    new LiveCharts.Defaults.ObservableValue(0),new LiveCharts.Defaults.ObservableValue(0)
+                }
             });
             testdevice.MonitorValueList.Add(new MonitorValueModel
             {
                 ValueId = "1",
                 ValueName = "出口温度",
                 Unit = "℃",
-                CurrentValue = 22
+                CurrentValue = 22,
+                LivecharValues = new LiveCharts.ChartValues<LiveCharts.Defaults.ObservableValue>{
+                    new LiveCharts.Defaults.ObservableValue(0),new LiveCharts.Defaults.ObservableValue(0)
+                }
             });
             testdevice.MonitorValueList.Add(new MonitorValueModel
             {
                 ValueId = "1",
                 ValueName = "补水压力",
                 Unit = "Mpa",
-                CurrentValue = 15
+                CurrentValue = 15,
+                LivecharValues = new LiveCharts.ChartValues<LiveCharts.Defaults.ObservableValue>{
+                    new LiveCharts.Defaults.ObservableValue(0),new LiveCharts.Defaults.ObservableValue(0)
+                }
             });
             testdevice.WarningMessageList.Add(new WarningMessageModel
             {

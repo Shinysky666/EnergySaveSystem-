@@ -13,6 +13,21 @@
     <!--定向导入ViewModel资源而不是通过绑定-->
     <UserControl.Resources>
         <yhjvm:SystemMonitorViewModel x:Key="smVM"/>
+        <!--ToggleButton的模板-->
+        <ControlTemplate TargetType="ToggleButton" x:Key="StateButtonTemplate">
+            <Border Name="ToggleButton_Back" Background="#EEE"  Height="20" Width="50" CornerRadius="3">
+                <Grid>
+                    <TextBlock Text="停机" FontSize="9" VerticalAlignment="Center" Margin="4,0"/>
+                    <TextBlock Text="运行" FontSize="9" VerticalAlignment="Center" Margin="4,0" HorizontalAlignment="Right"/>
+                    <Border Margin="2" HorizontalAlignment="Left" Width="23" Background="#DDD" CornerRadius="2">
+                        <TextBlock Text="||" FontSize="8" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <Border.RenderTransform>
+                            <TranslateTransform X="23" x:Name="Statett"/>
+                        </Border.RenderTransform>
+                    </Border>
+                </Grid>
+            </Border>
+        </ControlTemplate>
     </UserControl.Resources>
 
     <Grid>
@@ -45,7 +60,7 @@
                                     <ColumnDefinition Width="30"/>
                                     <ColumnDefinition Width="30"/>
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Text="{Binding ValueName,StringFormat=\{0\}:}" Foreground="#99FFFFFF"/>
+                                <TextBlock Text="{Binding ValueName,StringFormat=\{0\}:}" Foreground="#99FFFFFF" VerticalAlignment="Center"/>
                                 <lvc:CartesianChart Grid.Column="1" MinHeight="30" DataTooltip="{x:Null}">
                                     <lvc:CartesianChart.Series>
                                         <lvc:LineSeries Fill="Transparent" Values="{Binding LivecharValues}">
@@ -65,8 +80,8 @@
                                         <lvc:Axis ShowLabels="False"/>
                                     </lvc:CartesianChart.AxisY>
                                 </lvc:CartesianChart>
-                                <TextBlock Grid.Column="2" Text="{Binding CurrentValue}" HorizontalAlignment="Right" Margin="0,0,5,0"/>
-                                <TextBlock Grid.Column="3" Text="{Binding Unit}"/>
+                                <TextBlock Grid.Column="2" Text="{Binding CurrentValue}" Foreground="#99FFFFFF" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                                <TextBlock Grid.Column="3" Text="{Binding Unit}" Foreground="#99FFFFFF" VerticalAlignment="Center" Margin="3,0,0,0"/>
                             </Grid>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
@@ -74,7 +89,7 @@
 
                 <StackPanel Orientation="Horizontal" Grid.Row="2">
                     <TextBlock Text="实时状态: "/>
-                    <ToggleButton IsChecked="{Binding IsRuning}"/>
+                    <ToggleButton IsChecked="{Binding IsRuning}" Template="{StaticResource StateButtonTemplate}"/>
                 </StackPanel>
                 <ToggleButton Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Right" IsChecked="{Binding IsWarning}"/>
 
