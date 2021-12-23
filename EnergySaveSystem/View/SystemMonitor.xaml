@@ -18,7 +18,7 @@
             <Border Name="ToggleButton_Back" Background="#EEE"  Height="20" Width="50" CornerRadius="3">
                 <Grid>
                     <TextBlock Text="停机" FontSize="9" VerticalAlignment="Center" Margin="4,0"/>
-                    <TextBlock Text="运行" FontSize="9" VerticalAlignment="Center" Margin="4,0" HorizontalAlignment="Right"/>
+                    <TextBlock Text="运行" FontSize="9" Foreground="White" VerticalAlignment="Center" Margin="4,0" HorizontalAlignment="Right"/>
                     <Border Margin="2" HorizontalAlignment="Left" Width="23" Background="#DDD" CornerRadius="2">
                         <TextBlock Text="||" FontSize="8" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         <Border.RenderTransform>
@@ -27,6 +27,28 @@
                     </Border>
                 </Grid>
             </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsChecked" Value="True">
+                    <!--Trigger进入触发事件,动画实现-->
+                    <Trigger.EnterActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Duration="0:0:0.2" To="0" Storyboard.TargetName="Statett" Storyboard.TargetProperty="X"/>
+                                <ColorAnimation Duration="0:0:0.2" To="#38baec" Storyboard.TargetName="ToggleButton_Back" Storyboard.TargetProperty="Background.(SolidColorBrush.Color)"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </Trigger.EnterActions>
+                    <!--Trigger退出触发事件,动画实现-->
+                    <Trigger.ExitActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Duration="0:0:0.2" Storyboard.TargetName="Statett" Storyboard.TargetProperty="X"/>
+                                <ColorAnimation Duration="0:0:0.2" Storyboard.TargetName="ToggleButton_Back" Storyboard.TargetProperty="Background.(SolidColorBrush.Color)"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </Trigger.ExitActions>
+                </Trigger>
+            </ControlTemplate.Triggers>
         </ControlTemplate>
     </UserControl.Resources>
 
@@ -88,7 +110,7 @@
                 </ItemsControl>
 
                 <StackPanel Orientation="Horizontal" Grid.Row="2">
-                    <TextBlock Text="实时状态: "/>
+                    <TextBlock Text="实时状态: " VerticalAlignment="Center"/>
                     <ToggleButton IsChecked="{Binding IsRuning}" Template="{StaticResource StateButtonTemplate}"/>
                 </StackPanel>
                 <ToggleButton Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Right" IsChecked="{Binding IsWarning}"/>
