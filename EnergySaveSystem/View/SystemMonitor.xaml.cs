@@ -25,5 +25,37 @@ namespace EnergySaveSystem.View
         {
             InitializeComponent();
         }
+
+        private void Canvas_MouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            Console.WriteLine("Canvas_MouseWheel");
+            double newWidth = this.MainViewbox.ActualWidth + e.Delta;
+            double newHeight = this.MainViewbox.ActualHeight + e.Delta;
+            //限制最小长宽
+            if (newWidth < 100)
+                newWidth = 100;
+            if (newHeight < 500)
+                newHeight = 500;
+            this.MainViewbox.Width = newWidth;
+            this.MainViewbox.Height = newHeight;
+
+            //以屏幕中心缩放 可改写以鼠标位置缩放
+            this.MainViewbox.SetValue(Canvas.LeftProperty, (this.RenderSize.Width - this.MainViewbox.Width) / 2);
+        }
+
+        private void Canvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void Canvas_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void Canvas_MouseMove(object sender, MouseEventArgs e)
+        {
+
+        }
     }
 }

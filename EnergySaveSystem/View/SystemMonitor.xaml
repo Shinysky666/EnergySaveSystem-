@@ -8,21 +8,22 @@
              xmlns:yhjvm ="clr-namespace:EnergySaveSystem.ViewModel"
              xmlns:lvc ="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="650" d:DesignWidth="1200">
     
-    <!--定向导入ViewModel资源而不是通过绑定-->
+    
     <UserControl.Resources>
+        <!--定向导入ViewModel资源而不是通过绑定-->
         <yhjvm:SystemMonitorViewModel x:Key="smVM"/>
-        <!--ToggleButton的模板-->
+        <!--停机运行ToggleButton的模板-->
         <ControlTemplate TargetType="ToggleButton" x:Key="StateButtonTemplate">
-            <Border Name="ToggleButton_Back" Background="#EEE"  Height="20" Width="50" CornerRadius="3">
+            <Border Name="ToggleButton_Back" Background="#EEE"  Height="20" Width="70" CornerRadius="5">
                 <Grid>
-                    <TextBlock Text="停机" FontSize="9" VerticalAlignment="Center" Margin="4,0"/>
-                    <TextBlock Text="运行" FontSize="9" Foreground="White" VerticalAlignment="Center" Margin="4,0" HorizontalAlignment="Right"/>
-                    <Border Margin="2" HorizontalAlignment="Left" Width="23" Background="#DDD" CornerRadius="2">
-                        <TextBlock Text="||" FontSize="8" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <TextBlock Text="停机" FontSize="15" VerticalAlignment="Center" Margin="4,0"/>
+                    <TextBlock Text="运行" FontSize="15" Foreground="White" VerticalAlignment="Center" Margin="4,0" HorizontalAlignment="Right"/>
+                    <Border Margin="1" HorizontalAlignment="Left" Width="34" Background="#DDD" CornerRadius="5">
+                        <TextBlock Text="||" FontSize="15" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         <Border.RenderTransform>
-                            <TranslateTransform X="23" x:Name="Statett"/>
+                            <TranslateTransform X="35" x:Name="Statett"/>
                         </Border.RenderTransform>
                     </Border>
                 </Grid>
@@ -50,13 +51,37 @@
                 </Trigger>
             </ControlTemplate.Triggers>
         </ControlTemplate>
+
+        <!--警报图标ToggleButton的模板-->
+        <ControlTemplate TargetType="ToggleButton" x:Key="WarningButtonTemplate">
+            <TextBlock Name="WaringButtontxt" Text="&#xe62e;" FontFamily="/EnergySaveSystem;component/Assets/Fonts/#iconfont"
+                       Foreground="#FF3300" FontSize="18" VerticalAlignment="Center" Opacity="0"/>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsChecked" Value="True">
+                    <Setter Property="Opacity" Value="1" TargetName="WaringButtontxt"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
     </UserControl.Resources>
 
     <Grid>
-        <Canvas/>
+        <!--MouseWheel鼠标滚轮事件-->
+        <Canvas Background="Transparent"           
+                MouseWheel="Canvas_MouseWheel"
+                MouseLeftButtonDown="Canvas_MouseLeftButtonDown"
+                MouseLeftButtonUp="Canvas_MouseLeftButtonUp"
+                MouseMove="Canvas_MouseMove">
+            <Viewbox Canvas.Left="0" Canvas.Top="350" Name="MainViewbox">
+                <Grid>
+                    <Polygon VerticalAlignment="Bottom" Fill="#AAF7F9FA" Points="0,200 150,0 1000,0 1200,200"
+                             Stroke="#DDDFFDFF" StrokeThickness="2"/>
+                </Grid>
+            </Viewbox>
+        </Canvas>
+        
         <Grid VerticalAlignment="Top" Margin="20,10">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="320"/>
+                <ColumnDefinition Width="330"/>
                 <ColumnDefinition/>
                 <ColumnDefinition Width="300"/>
             </Grid.ColumnDefinitions>
@@ -70,9 +95,9 @@
                     <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
 
-                <TextBlock Text="{Binding DeviceName}" Foreground="White" FontSize="20"/>
+                <TextBlock Text="{Binding DeviceName}" Foreground="White" FontSize="20" Margin="0,15"/>
 
-                <ItemsControl Grid.Row="1" ItemsSource="{Binding MonitorValueList}" Foreground="White">
+                <ItemsControl Grid.Row="1" ItemsSource="{Binding MonitorValueList}" Foreground="White" FontSize="15">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <Grid>
@@ -80,7 +105,7 @@
                                     <ColumnDefinition Width="60"/>
                                     <ColumnDefinition/>
                                     <ColumnDefinition Width="30"/>
-                                    <ColumnDefinition Width="30"/>
+                                    <ColumnDefinition Width="40"/>
                                 </Grid.ColumnDefinitions>
                                 <TextBlock Text="{Binding ValueName,StringFormat=\{0\}:}" Foreground="#99FFFFFF" VerticalAlignment="Center"/>
                                 <lvc:CartesianChart Grid.Column="1" MinHeight="30" DataTooltip="{x:Null}">
@@ -109,13 +134,26 @@
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
 
-                <StackPanel Orientation="Horizontal" Grid.Row="2">
-                    <TextBlock Text="实时状态: " VerticalAlignment="Center"/>
+                <StackPanel Orientation="Horizontal" Grid.Row="2" Height="50">
+                    <TextBlock Text="实时状态: " VerticalAlignment="Center" FontSize="15"/>
                     <ToggleButton IsChecked="{Binding IsRuning}" Template="{StaticResource StateButtonTemplate}"/>
                 </StackPanel>
-                <ToggleButton Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Right" IsChecked="{Binding IsWarning}"/>
+                <ToggleButton Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Right" IsChecked="{Binding IsWarning}"
+                              Template="{StaticResource WarningButtonTemplate}" Margin="0,0,15,0"
+                              IsEnabled="False"/>
 
-                <ItemsControl Grid.Row="3" ItemsSource="{Binding WarningMessageList}"/>
+                <ItemsControl Grid.Row="3" ItemsSource="{Binding WarningMessageList}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Message}" Foreground="#CCFF4400" TextWrapping="Wrap"
+                                       LineHeight="22" FontSize="15">
+                                <TextBlock.Effect>
+                                    <DropShadowEffect Color="White" ShadowDepth="0" Direction="0" Opacity="0.7" BlurRadius="1"/>
+                                </TextBlock.Effect>
+                            </TextBlock>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
 
             </Grid>
 
