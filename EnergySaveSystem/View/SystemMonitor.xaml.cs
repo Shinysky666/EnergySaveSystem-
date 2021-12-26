@@ -43,19 +43,41 @@ namespace EnergySaveSystem.View
             this.MainViewbox.SetValue(Canvas.LeftProperty, (this.RenderSize.Width - this.MainViewbox.Width) / 2);
         }
 
+        //鼠标按下拖动MainViewbox
+        bool _isMoving = false;
+        Point _MouseClickPoint = new Point(0, 0);
+        double MainViewbox_left = 0, MainViewbox_top = 0;
+
         private void Canvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-
+            _isMoving = true;
+            _MouseClickPoint = e.GetPosition(sender as Canvas);
+            //获取鼠标点击前的位置
+            MainViewbox_left = double.Parse(this.MainViewbox.GetValue(Canvas.LeftProperty).ToString());
+            MainViewbox_top = double.Parse(this.MainViewbox.GetValue(Canvas.TopProperty).ToString());
+            (sender as Canvas).CaptureMouse();
+            e.Handled = true;
         }
 
         private void Canvas_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-
+        {          
+            _isMoving = false;
+            (sender as Canvas).ReleaseMouseCapture();
+            e.Handled = true;
         }
 
+        //鼠标拖动Canvas 更改MainViewbox位置
         private void Canvas_MouseMove(object sender, MouseEventArgs e)
         {
-
+            if(_isMoving)
+            {
+                e.Handled = true;
+                Point currentPoint = e.GetPosition(sender as Canvas);
+                this.MainViewbox.SetValue(Canvas.LeftProperty, 
+                    MainViewbox_left + (currentPoint.X - _MouseClickPoint.X));
+                this.MainViewbox.SetValue(Canvas.TopProperty,
+                    MainViewbox_top + (currentPoint.Y - _MouseClickPoint.Y));
+            }
         }
     }
 }
