@@ -43,7 +43,7 @@ namespace EnergySaveSystem.View
             this.MainViewbox.SetValue(Canvas.LeftProperty, (this.RenderSize.Width - this.MainViewbox.Width) / 2);
         }
 
-        //鼠标按下拖动MainViewbox
+        //鼠标按下拖动 MainViewbox
         bool _isMoving = false;
         Point _MouseClickPoint = new Point(0, 0);
         double MainViewbox_left = 0, MainViewbox_top = 0;
