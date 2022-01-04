@@ -42,3 +42,5 @@ D:\Study\EnergySaveSystem\Controls\obj\Debug\Components\CoolingTower.baml
 D:\Study\EnergySaveSystem\Controls\obj\Debug\Components\CoolingPump.g.cs
 D:\Study\EnergySaveSystem\Controls\obj\Debug\GeneratedInternalTypeHelper.g.cs
 D:\Study\EnergySaveSystem\Controls\obj\Debug\Components\CoolingPump.baml
+D:\Study\EnergySaveSystem\Controls\obj\Debug\Components\Pipeline.g.cs
+D:\Study\EnergySaveSystem\Controls\obj\Debug\Components\Pipeline.baml

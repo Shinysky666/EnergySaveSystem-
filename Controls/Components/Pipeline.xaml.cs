@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace Controls.Components
 {
     /// <summary>
-    /// CoolingPump.xaml 的交互逻辑
+    /// Pipeline.xaml 的交互逻辑
     /// </summary>
-    public partial class CoolingPump : ComponentBase
+    public partial class Pipeline : UserControl
     {
-        public CoolingPump()
+        public Pipeline()
         {
             InitializeComponent();
         }
