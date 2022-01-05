@@ -35,11 +35,12 @@
                     <GradientStop Color="#FFCBCBCB" Offset="0.8"/>
                 </LinearGradientBrush>
             </Border.Background>
-            <Border Margin="2" Name="lineborder">
+            <Border Margin="2" Name="lineborder"
+                    CornerRadius="{Binding CapRadius, RelativeSource={RelativeSource AncestorType=UserControl,Mode=FindAncestor}}">
                 <Line X1="0" Y1="0" X2="{Binding RelativeSource={RelativeSource Self}, Path=ActualWidth}" Y2="0"
                       Name="liquidLine" Opacity="0.3"
-                      Stroke="Red"
-                      StrokeThickness="12"
+                      Stroke="{Binding liquidColor,RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}}"
+                      StrokeThickness="{Binding ElementName=lineborder, Path=ActualHeight}"
                       StrokeDashArray="2,3"
                       VerticalAlignment="Center"
                       Stretch="Fill"
