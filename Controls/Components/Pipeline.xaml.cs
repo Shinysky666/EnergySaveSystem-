@@ -59,8 +59,6 @@ namespace Controls.Components
                 new PropertyMetadata(default(int)));
 
 
-
-
         public Pipeline()
         {
             InitializeComponent();

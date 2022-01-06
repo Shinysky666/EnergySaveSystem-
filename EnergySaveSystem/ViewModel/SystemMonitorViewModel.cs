@@ -9,42 +9,60 @@ using System.Threading.Tasks;
 
 namespace EnergySaveSystem.ViewModel
 {
-    public class SystemMonitorViewModel
+    public class SystemMonitorViewModel : NotifyPropertyBase
     {
         public ObservableCollection<LogModel> Loglist { get; set; } = new ObservableCollection<LogModel>();
         public DeviceModel testdevice { get; set; }
+        public CommandBase ComponentCommand { get; set; }
+
+        private DeviceModel _currentDevice;
+        public DeviceModel CurrentDevice
+        {
+            get { return _currentDevice; }
+            set { _currentDevice = value; this.RaisePropertyChanged(); }
+        }
+        
+        //是否展示左侧状态栏
+        private bool _isShowDetail;
+        public bool IsShowDetail
+        {
+            get { return _isShowDetail; }
+            set { _isShowDetail = value; }
+        }
+
 
         public SystemMonitorViewModel()
         {
             InitLogInfo();
             InitDeviceModel();
+            this.ComponentCommand = new CommandBase(new Action<object>(DoTowerCommand));
         }
 
         public void InitLogInfo()
         {
-            this.Loglist.Add(new LogModel 
-            { 
-                RowNumber = 1, DeviceName = "冷却塔 1#",LogInfo = "已启动", LogType = LogType.Info 
+            this.Loglist.Add(new LogModel
+            {
+                RowNumber = 1, DeviceName = "冷却塔 1#", LogInfo = "已启动", LogType = LogType.Info
             });
             this.Loglist.Add(new LogModel
             {
-                RowNumber = 2,DeviceName = "冷却塔 2#",LogInfo = "已启动", LogType = LogType.Info
+                RowNumber = 2, DeviceName = "冷却塔 2#", LogInfo = "已启动", LogType = LogType.Info
             });
             this.Loglist.Add(new LogModel
             {
-                RowNumber = 3,DeviceName = "冷却塔 3#",LogInfo = "液位极低",LogType = LogType.Warn
+                RowNumber = 3, DeviceName = "冷却塔 3#", LogInfo = "液位极低", LogType = LogType.Warn
             });
             this.Loglist.Add(new LogModel
             {
-                RowNumber = 4, DeviceName = "循环水泵 1#",LogInfo = "频率过大",LogType = LogType.Warn
+                RowNumber = 4, DeviceName = "循环水泵 1#", LogInfo = "频率过大", LogType = LogType.Warn
             });
             this.Loglist.Add(new LogModel
             {
-                RowNumber = 5,DeviceName = "循环水泵 2#",LogInfo = "已启动",LogType = LogType.Info
+                RowNumber = 5, DeviceName = "循环水泵 2#", LogInfo = "已启动", LogType = LogType.Info
             });
             this.Loglist.Add(new LogModel
             {
-                RowNumber = 6,DeviceName = "循环水泵 3#",LogInfo = "已启动",LogType = LogType.Info
+                RowNumber = 6, DeviceName = "循环水泵 3#", LogInfo = "已启动", LogType = LogType.Info
             });
         }
 
@@ -56,7 +74,7 @@ namespace EnergySaveSystem.ViewModel
             testdevice.IsWarning = true;
             testdevice.MonitorValueList.Add(new MonitorValueModel
             {
-                ValueId="1",
+                ValueId = "1",
                 ValueName = "液位",
                 Unit = "m",
                 CurrentValue = 0,
@@ -126,6 +144,11 @@ namespace EnergySaveSystem.ViewModel
             {
                 Message = "冷却塔 1#入口温度极低, 当前值: 0"
             });
+        }
+
+        private void DoTowerCommand(object param)
+        {
+            CurrentDevice = param as DeviceModel;
         }
     }
 }
