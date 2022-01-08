@@ -23,18 +23,18 @@ namespace EnergySaveSystem.ViewModel
         }
         
         //是否展示左侧状态栏
-        private bool _isShowDetail;
+        private bool _isShowDetail =false;
         public bool IsShowDetail
         {
             get { return _isShowDetail; }
-            set { _isShowDetail = value; }
+            set { _isShowDetail = value; this.RaisePropertyChanged(); }
         }
 
 
         public SystemMonitorViewModel()
         {
-            InitLogInfo();
-            InitDeviceModel();
+            //InitLogInfo();
+            //InitDeviceModel();
             this.ComponentCommand = new CommandBase(new Action<object>(DoTowerCommand));
         }
 
@@ -149,6 +149,7 @@ namespace EnergySaveSystem.ViewModel
         private void DoTowerCommand(object param)
         {
             CurrentDevice = param as DeviceModel;
+            this.IsShowDetail = true;
         }
     }
 }

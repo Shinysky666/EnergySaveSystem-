@@ -1,4 +1,5 @@
-﻿using LiveCharts;
+﻿using EnergySaveSystem.Base;
+using LiveCharts;
 using LiveCharts.Defaults;
 using System;
 using System.Collections.Generic;
@@ -17,7 +18,7 @@ namespace EnergySaveSystem.Model
         HiHi = 2
     }
     //监控数据模型
-    public class MonitorValueModel
+    public class MonitorValueModel: NotifyPropertyBase
     {
         public Action<MonitorValueState, string, string> ValueStateChanged;
         public string ValueId { get; set; }
@@ -37,8 +38,8 @@ namespace EnergySaveSystem.Model
         public double CurrentValue
         {
             get { return _currentValue; }
-            set 
-            { 
+            set
+            {
                 _currentValue = value;
                 if (IsAlarm)
                 {
@@ -70,6 +71,8 @@ namespace EnergySaveSystem.Model
                 LivecharValues.Add(new ObservableValue(value));
                 if (LivecharValues.Count > 60)
                     LivecharValues.RemoveAt(0);
+
+                this.RaisePropertyChanged();
             }
         }
 

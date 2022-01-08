@@ -107,6 +107,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Base\CommandBase.cs" />
+    <Compile Include="Base\Converter\BooltoVisibilityConverter.cs" />
     <Compile Include="Model\LogModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="ViewModel\SystemMonitorViewModel.cs" />

@@ -9,6 +9,7 @@
              xmlns:yhjvm ="clr-namespace:EnergySaveSystem.ViewModel"
              xmlns:base="clr-namespace:EnergySaveSystem.Base"
              xmlns:lvc ="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+             xmlns:converter="clr-namespace:EnergySaveSystem.Base.Converter"
              mc:Ignorable="d" 
              d:DesignHeight="650" d:DesignWidth="1200">
     
@@ -16,6 +17,8 @@
     <UserControl.Resources>
         <!--定向导入ViewModel资源而不是通过绑定-->
         <yhjvm:SystemMonitorViewModel x:Key="smVM"/>
+        <converter:BooltoVisibilityConverter x:Key="BooltoVisibilityConverter_Key"/>
+
         <!--停机运行ToggleButton的模板-->
         <ControlTemplate TargetType="ToggleButton" x:Key="StateButtonTemplate">
             <Border Name="ToggleButton_Back" Background="#EEE"  Height="20" Width="70" CornerRadius="5">
@@ -66,7 +69,7 @@
         </ControlTemplate>
     </UserControl.Resources>
 
-    <Grid>
+    <Grid DataContext="{Binding Source={StaticResource smVM}}" >
         <!--MouseWheel鼠标滚轮事件-->
         <Canvas Background="Transparent"           
                 MouseWheel="Canvas_MouseWheel"
@@ -82,15 +85,107 @@
                     <yhjcomponents:CoolingTower Width="90" Height="110" HorizontalAlignment="Left" 
                                                 VerticalAlignment="Bottom" Margin="125,0,0,95"
                                                 Command="{Binding ComponentCommand}"
-                                                CommandParameter="{Binding Path=(base:GlobalMonitor.DeviceList)[2]}"/>
+                                                CommandParameter="{Binding Path=(base:GlobalMonitor.DeviceList)[2]}"
+                                                IsRuning="{Binding Path=(base:GlobalMonitor.DeviceList)[2].IsRuning}"
+                                                IsWarning="{Binding Path=(base:GlobalMonitor.DeviceList)[2].IsWarning}"/>
                     <yhjcomponents:CoolingTower Width="95" Height="115" HorizontalAlignment="Left" 
                                                 VerticalAlignment="Bottom" Margin="98,0,0,52"
                                                 Command="{Binding ComponentCommand}"
-                                                CommandParameter="{Binding Path=(base:GlobalMonitor.DeviceList)[1]}"/>
+                                                CommandParameter="{Binding Path=(base:GlobalMonitor.DeviceList)[1]}"
+                                                IsRuning="{Binding Path=(base:GlobalMonitor.DeviceList)[1].IsRuning}"
+                                                IsWarning="{Binding Path=(base:GlobalMonitor.DeviceList)[1].IsWarning}"/>
                     <yhjcomponents:CoolingTower Width="100" Height="120" HorizontalAlignment="Left" 
                                                 VerticalAlignment="Bottom" Margin="70,0,0,10"
                                                 Command="{Binding ComponentCommand}"
-                                                CommandParameter="{Binding Path=(base:GlobalMonitor.DeviceList)[0]}"/>
+                                                CommandParameter="{Binding Path=(base:GlobalMonitor.DeviceList)[0]}"
+                                                IsRuning="{Binding Path=(base:GlobalMonitor.DeviceList)[0].IsRuning}"
+                                                IsWarning="{Binding Path=(base:GlobalMonitor.DeviceList)[0].IsWarning}"/>
+
+                    <!--冷却泵-->
+                    <yhjcomponents:CoolingPump Panel.ZIndex="2" Width="55" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="295.5,0,0,91"
+                                               IsRuning="{Binding Path=(base:GlobalMonitor.DeviceList)[2].IsRuning}"
+                                               IsWarning="{Binding Path=(base:GlobalMonitor.DeviceList)[2].IsWarning}"/>
+                    <yhjcomponents:CoolingPump Panel.ZIndex="2" Width="57" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="288.458,0,0,61"
+                                               IsRuning="{Binding Path=(base:GlobalMonitor.DeviceList)[1].IsRuning}"
+                                               IsWarning="{Binding Path=(base:GlobalMonitor.DeviceList)[1].IsWarning}"/>
+                    <yhjcomponents:CoolingPump Panel.ZIndex="2" Width="60" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="280,0,0,29.999" 
+                                               IsRuning="{Binding Path=(base:GlobalMonitor.DeviceList)[0].IsRuning}"
+                                               IsWarning="{Binding Path=(base:GlobalMonitor.DeviceList)[0].IsWarning}"/>
+                    
+
+
+                    <!--管道-->
+                    <yhjcomponents:Pipeline Height="5" Width="35" Direction="1" CapRadius="2" liquidColor="Orange" Margin="161,0,0,98" 
+                                        HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
+                    <yhjcomponents:Pipeline Panel.ZIndex="1" Height="5" Width="26" Direction="1" CapRadius="2" liquidColor="Orange" Margin="208,0,0,180" 
+                                        HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
+                    <yhjcomponents:Pipeline Panel.ZIndex="1" Height="5" Width="28" Direction="1" CapRadius="2" liquidColor="Orange" Margin="185,0,0,140"
+                                         HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
+                    <yhjcomponents:Pipeline Height="5" Width="70" Direction="1" CapRadius="2" liquidColor="Orange" Margin="193,0,0,97"
+                                         HorizontalAlignment="Left" VerticalAlignment="Bottom">
+                        <yhjcomponents:Pipeline.RenderTransform>
+                            <RotateTransform Angle="-66"/>
+                        </yhjcomponents:Pipeline.RenderTransform>
+                    </yhjcomponents:Pipeline>
+                    <yhjcomponents:Pipeline Height="5" Width="25" Direction="2" CapRadius="2" liquidColor="Orange" Margin="220,0,0,158"
+                                         HorizontalAlignment="Left" VerticalAlignment="Bottom">
+                        <yhjcomponents:Pipeline.RenderTransform>
+                            <RotateTransform Angle="-66"/>
+                        </yhjcomponents:Pipeline.RenderTransform>
+                    </yhjcomponents:Pipeline>
+                    <yhjcomponents:Pipeline Height="5" Width="405" Direction="1" CapRadius="2" liquidColor="Orange" Margin="221,0,0,159"
+                                         HorizontalAlignment="Left" VerticalAlignment="Bottom" Panel.ZIndex="6"/>
+
+                    <yhjcomponents:Pipeline Height="5" Width="20" Direction="1" CapRadius="2" liquidColor="Orange" Margin="480,0,0,158"
+                                         HorizontalAlignment="Left" VerticalAlignment="Bottom">
+                        <yhjcomponents:Pipeline.RenderTransform>
+                            <RotateTransform Angle="90"/>
+                        </yhjcomponents:Pipeline.RenderTransform>
+                    </yhjcomponents:Pipeline>
+
+                    <yhjcomponents:Pipeline Height="5" Width="20" Direction="1" CapRadius="2" liquidColor="Orange" Margin="626,0,0,158"
+                                         HorizontalAlignment="Left" VerticalAlignment="Bottom">
+                        <yhjcomponents:Pipeline.RenderTransform>
+                            <RotateTransform Angle="90"/>
+                        </yhjcomponents:Pipeline.RenderTransform>
+                    </yhjcomponents:Pipeline>
+
+
+                    <!--制冷机-->
+                    <Polygon VerticalAlignment="Bottom" HorizontalAlignment="Left" Points="15,0 65,0 60,85 0,85" Fill="#443FADFF" Margin="450,0,0,70" Panel.ZIndex="5"/>
+                    <Rectangle VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="5" Height="55" Fill="#663FADFF" Margin="510,0,0,15">
+                        <Rectangle.RenderTransform>
+                            <SkewTransform AngleY="-86.65"/>
+                        </Rectangle.RenderTransform>
+                    </Rectangle>
+                    <Rectangle VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="60" Height="55" Fill="#223FADFF" Margin="450,0,0,15"/>
+
+                    <Polygon VerticalAlignment="Bottom" HorizontalAlignment="Left" Points="0,0 50,0 65,85 5,85" Fill="#443FADFF" Margin="610,0,0,70" Panel.ZIndex="7"/>
+                    <Rectangle VerticalAlignment="Bottom" HorizontalAlignment="Left" 
+                               Width="5" Height="55" Fill="#663FADFF" Margin="610,0,0,15" RenderTransformOrigin="1,1">
+                        <Rectangle.RenderTransform>
+                            <SkewTransform AngleY="86.65"/>
+                        </Rectangle.RenderTransform>
+                    </Rectangle>
+                    <Rectangle VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="60" Height="55" Fill="#223FADFF" Margin="615,0,0,15"/>
+
+                    <!--水箱-->
+                    <Polygon VerticalAlignment="Bottom" HorizontalAlignment="Left" Points="0,0 86,0 125,30 40,30" Fill="#443FADFF" Margin="925.408,0,0,238"/>
+                    <Polygon VerticalAlignment="Bottom" HorizontalAlignment="Left" 
+                             Points="0 0 40 30 40 120 0 65" Fill="#663FADFF" Margin="925.498,0,0,147.875" RenderTransformOrigin="1,1">
+                    </Polygon>
+                    <Rectangle VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="85" Height="89.812" Fill="#223FADFF" Margin="965.413,0,0,148.188"/>
+
+
+                    <!--锅炉-->
+                    <Polygon VerticalAlignment="Bottom" HorizontalAlignment="Left" Points="0,0 50,0 85,85 25,85" Fill="#443FADFF" Margin="770,0,0,70"/>
+                    <Rectangle VerticalAlignment="Bottom" HorizontalAlignment="Left" 
+                               Width="25" Height="55" Fill="#663FADFF" Margin="770,0,0,15" RenderTransformOrigin="1,1">
+                        <Rectangle.RenderTransform>
+                            <SkewTransform AngleY="73.65"/>
+                        </Rectangle.RenderTransform>
+                    </Rectangle>
+                    <Rectangle VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="60" Height="55" Fill="#223FADFF" Margin="795,0,0,15"/>
                 </Grid>
             </Viewbox>
         </Canvas>
@@ -103,8 +198,7 @@
             </Grid.ColumnDefinitions>
 
             <!--左侧设备详情-->
-            <Grid DataContext="{Binding Source={StaticResource smVM}}" 
-                  Visibility="{Binding IsShowDetail}">
+            <Grid Visibility="{Binding IsShowDetail,Converter={StaticResource BooltoVisibilityConverter_Key}}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
@@ -127,7 +221,7 @@
                                 <TextBlock Text="{Binding ValueName,StringFormat=\{0\}:}" Foreground="#99FFFFFF" VerticalAlignment="Center"/>
                                 <lvc:CartesianChart Grid.Column="1" MinHeight="30" DataTooltip="{x:Null}">
                                     <lvc:CartesianChart.Series>
-                                        <lvc:LineSeries Fill="Transparent" Values="{Binding LivecharValues}">
+                                        <lvc:LineSeries Values="{Binding LivecharValues}" Fill="Transparent" PointGeometrySize="0">
                                             <lvc:LineSeries.Stroke>
                                                 <LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
                                                     <GradientStop Color="Orange" Offset="0.5"/>
