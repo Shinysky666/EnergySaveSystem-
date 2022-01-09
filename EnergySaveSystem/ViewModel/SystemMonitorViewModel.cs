@@ -33,7 +33,7 @@ namespace EnergySaveSystem.ViewModel
 
         public SystemMonitorViewModel()
         {
-            //InitLogInfo();
+            InitLogInfo();
             //InitDeviceModel();
             this.ComponentCommand = new CommandBase(new Action<object>(DoTowerCommand));
         }
